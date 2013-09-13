@@ -1,0 +1,183 @@
+
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>clienttest</title>
+    <script type="text/javascript" src="../resources/json2.js"></script>
+    <script type="text/javascript" src="../resources/jquery.min.js"></script>
+    <script type="text/javascript" src="../resources/prettify.js"></script>
+    <script type="text/javascript" src="../resources/bootstrap.tabs.js"></script>
+    <script type="text/javascript" src="../resources/bootstrap.dropdown.js"></script>
+    <script type="text/javascript" src="../resources/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="../../../client/splunk.js"></script>
+    <script type="text/javascript" src="splunkcred.js"></script>
+	
+	<style type="text/css" title="currentStyle">
+    @import "DataTables-1.9.4/media/css/demo_table.css";
+	</style>
+	
+	<script type="text/javascript" charset="utf-8" src="DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type='text/javascript'>
+     google.load('visualization', '1', {'packages': ['geochart']});
+
+
+      function drawRegionsMap(obj) {
+        var data = google.visualization.arrayToDataTable(obj);
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    };
+    </script>	
+
+	
+    <script type="text/javascript" charset="utf-8">
+
+		var fullResults='';
+		var htmlSnippets='';
+
+		function getItems(sel){
+
+		var http = new splunkjs.ProxyHttp("/proxy");
+		var service = new splunkjs.Service(http, {
+			username: splunkusername,
+			password: splunkpassword,
+			scheme: splunkscheme,
+			host: splunkhost,
+			port:splunkport,
+			version:splunkversion
+		});
+		
+		
+
+      Async = splunkjs.Async;
+      utils = splunkjs.Utils;
+	  
+		Async.chain([
+		// First, we log in
+		function(done) {
+		service.login(done);
+		},
+		// Perform the search
+		function(success, done) {
+		if (!success) {
+		done("Error logging in");
+		}
+		service.oneshotSearch("search index=brand and "+sel +" and and response.queries.request{}.cr!='' | sort response.queries.request{}.cr|stats sum(response.queries.request{}.totalResults) by response.queries.request{}.gl", {}, done);
+		//index=brand and Automobile and response.queries.request{}.cr!='' | sort response.queries.request{}.cr|stats sum(response.queries.request{}.totalResults) by response.queries.request{}.gl
+		},
+		// The job is done, and the results are returned inline
+		function(results, done) {
+		fullResults	=	results;
+		// Find the index of the fields we want
+		var rawIndex = utils.indexOf(results.fields, "_raw");
+		var sourcetypeIndex = utils.indexOf(results.fields, "sourcetype");
+		var userIndex = utils.indexOf(results.fields, "user");
+		
+		
+		//drawRegionsMap([['Country', 'Results'],['Germany', 200],]);
+
+			 var searchResult='[["Country", "Results"],';
+			for(var i = 0; i < results.rows.length; i++) {
+			searchResult+= JSON.stringify(results.rows[i])+',';
+			}
+			searchResult+="]";
+			searchResult=searchResult.substring(0,searchResult.length-2)+']';
+			console.log(searchResult);
+			drawRegionsMap(jQuery.parseJSON(searchResult));
+			
+		done();
+		}
+		]
+		);		
+		
+
+}
+
+
+		
+    </script> 
+	
+</head>
+<body>
+          <div class="ui-grid-a" style="background:black">
+              <div class="ui-block-a">
+                  <div style=" text-align:center" data-controltype="image">
+                      <img style="width: 50px; height: 50px" src="https://s3.amazonaws.com/assets.codiqa.com/zJwzOOlnTHqlXkuTvYKa_Icon-Small-50.png">
+                  </div>
+              </div>
+              <div class="ui-block-b">
+                  <div data-controltype="textblock">
+                      <p align='center'>
+                          <span style="font-size: xx-large;">
+                              <strong>
+                                  <span style="color: rgb(255, 0, 255);" data-mce-style="color: #ff00ff;">
+                                      B
+                                  </span>
+                                  <span style="color: rgb(255, 204, 0);" data-mce-style="color: #ffcc00;">
+                                      r
+                                  </span>
+                                  <span style="color: rgb(255, 255, 0);" data-mce-style="color: #ffff00;">
+                                      a
+                                  </span>
+                                  <span style="color: rgb(0, 255, 0);" data-mce-style="color: #00ff00;">
+                                      n
+                                  </span>
+                                  <span style="color: rgb(0, 255, 255);">
+                                      d
+                                  </span>
+                                  <span style="color: rgb(255, 255, 255);">
+                                      A
+                                  </span>
+                                  <span style="color: rgb(0, 204, 255);" data-mce-style="color: #00ccff;">
+                                      l
+                                  </span>
+                                  <span style="color: rgb(0, 255, 255);" data-mce-style="color: #00ffff;">
+                                      y
+                                  </span>
+                                  <span style="color: rgb(0, 255, 0);" data-mce-style="color: #00ff00;">
+                                      t
+                                  </span>
+                                  <span style="color: rgb(255, 255, 0);" data-mce-style="color: #ffff00;">
+                                      i
+                                  </span>
+                                  <span style="color: rgb(255, 204, 0);" data-mce-style="color: #ffcc00;">
+                                      c
+                                  </span>
+                                  <span style="color: rgb(255, 0, 255);" data-mce-style="color: #ff00ff;">
+                                      s
+                                  </span>
+                              </strong>
+                          </span>
+                      </p>
+                  </div>
+              </div>
+          </div>	
+		  
+                      <div class="ui-block-d" align='center'>
+                          <div data-role="fieldcontain" data-controltype="selectmenu">
+                          <div data-controltype="textblock">
+                              <p style="text-align: center;">
+                                  <b>
+                                      Group
+                                  </b>
+                              </p>
+                          </div>						  
+                              <select id="cmbGroup" name="" data-mini="true">
+                                  <option value="Automobile">Automobile</option>
+								  <option value="TechCompanies">TechCompanies</option>
+								  <option value="BrandPersonality">BrandPersonality</option>								  
+                              </select>
+							  <input type=button onclick=getItems(document.getElementById("cmbGroup").value) value='Go'>
+                          </div>
+		  
+</br></br></br>
+
+ <div id="chart_div" style="width: 900px; height: 500px;"></div>
+ 
+</body>
+</html>

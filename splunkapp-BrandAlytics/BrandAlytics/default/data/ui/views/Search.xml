@@ -1,0 +1,35 @@
+
+<view autoCancelInterval="90" isVisible="true" onunloadCancelJobs="true" template="dashboard.html" isSticky="False">
+  <label>Search</label>
+  <module name="AccountBar" layoutPanel="appHeader" />
+  <module name="AppBar" layoutPanel="appHeader" />
+  <module name="SideviewUtils" layoutPanel="appHeader" />
+  
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="maxSize">2</param>
+    <param name="clearOnJobDispatch">False</param>
+  </module>
+  
+
+  <module name="HTML" layoutPanel="viewHeader">
+    <param name="html"><![CDATA[
+    <h1>Search</h1>
+    ]]></param>
+  </module>
+
+
+  <!-- Begin SearchBar: renders the search box -->
+  <module name="SearchBar" layoutPanel="mainSearchControls">
+	<param name="default">index=brand</param>
+    <!-- Begin Paginator: provides for paging through the results of the search -->
+    <module name="Paginator">
+      <param name="entityName">events</param>
+
+        <!-- EventsViewer: Display search results -->
+  	<module name="EventsViewer"/>
+    </module> <!-- End Paginator module-->
+  </module> <!-- End SearchBar module -->
+
+</view>
+

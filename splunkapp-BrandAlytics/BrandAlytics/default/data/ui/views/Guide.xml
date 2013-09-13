@@ -1,0 +1,82 @@
+
+<view autoCancelInterval="90" isVisible="true" onunloadCancelJobs="true" template="dashboard.html" isSticky="False">
+  <label>Guide</label>
+  <module name="AccountBar" layoutPanel="appHeader" />
+  <module name="AppBar" layoutPanel="appHeader" />
+  <module name="SideviewUtils" layoutPanel="appHeader" />
+  
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="maxSize">2</param>
+    <param name="clearOnJobDispatch">False</param>
+  </module>
+  
+
+  <module name="HTML" layoutPanel="viewHeader">
+    <param name="html"><![CDATA[
+    <h1>Guide</h1>
+    ]]></param>
+  </module>
+
+  
+  <module name="HTML" layoutPanel="panel_row1_col1">
+    <param name="html"><![CDATA[
+
+<h1>
+	<pre>
+High level overview</br></br>
+
+BrandAlytics is formed by merging Brand and Analytics. </br></br>
+
+Functions
+	User 
+		Defines a set of brands. Brands can be Company names, Product names, Movie Personalities, or any set of keywords.
+		Defines filter criterion for the brand. 
+			Filter criterion can be 
+				Web Sites or Blogs to monitor
+				Country to look out for 
+				Language to look in.
+		Defines the settings to use for querying the google custom search engine.
+
+	App
+		Schedules daily collection of data based upon user definitions using scripted inputs.
+		Collects data by querying Google Custom Search Engine. 
+		Puts the collected data into Splunk by writing data into a new custom index.
+		Uses Javascript SDK to provide insights into the brands.
+ 
+	
+<h1>
+Usage 
+
+      <div style="background-color:black">
+	  <p>
+	  1. Define brands and Specify other filter criteria.</br>
+
+			<b>App>BrandAlytics>Brand>Define</b></br></br></br>
+
+2. Verify the definitions.</br>
+
+	<b>App>BrandAlytics>Brand>Definitions</b></br></br></br>
+	
+3. Modify Settings </br>
+	<b>App>BrandAlytics>Brand>Settings</b></br></br></br> More details about Settings available in Help>FAQ.</br></br></br>
+	
+4. Check Analytics tab on a daily basis to observe the latest trends and check Brand performance.</br>
+
+	<b>App>BrandAlytics>Analytics</b></br></br></br>
+	
+5. Provide suggestions for improvement of the product and give new requirements :-)</br>
+	Send email to <b>avinash.mangipudi at live dot com.</b></br>
+	
+	  </p>
+      </div>
+</h1>
+</pre>
+
+    ]]></param>
+
+  </module>  
+
+
+</view>
+

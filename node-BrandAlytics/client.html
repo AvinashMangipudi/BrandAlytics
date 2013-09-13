@@ -1,0 +1,69 @@
+
+
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>clienttest</title>
+    <script type="text/javascript" src="../resources/json2.js"></script>
+    <script type="text/javascript" src="../resources/jquery.min.js"></script>
+    <script type="text/javascript" src="../resources/prettify.js"></script>
+    <script type="text/javascript" src="../resources/bootstrap.tabs.js"></script>
+    <script type="text/javascript" src="../resources/bootstrap.dropdown.js"></script>
+    <script type="text/javascript" src="../resources/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="../../../client/splunk.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+		var http = new splunkjs.ProxyHttp("/proxy");
+		var service = new splunkjs.Service(http, {
+			username: "admin",
+			password: "inspira",
+			scheme: "https",
+			host: "localhost",
+			port:"8089",
+			version:"5.0"
+		});
+		
+		
+
+      Async = splunkjs.Async;
+      utils = splunkjs.Utils;
+	  
+		Async.chain([
+		// First, we log in
+		function(done) {
+		service.login(done);
+		},
+		// Perform the search
+		function(success, done) {
+		if (!success) {
+		done("Error logging in");
+		}
+		service.oneshotSearch("search index=brand AND BrandPersonality AND response.queries.request{}.siteSearch!=''", {}, done);
+		},
+		// The job is done, and the results are returned inline
+		function(results, done) {
+		// Find the index of the fields we want
+		var rawIndex = utils.indexOf(results.fields, "_raw");
+		var sourcetypeIndex = utils.indexOf(results.fields, "sourcetype");
+		var userIndex = utils.indexOf(results.fields, "user");
+		// Print out each result and the key-value pairs we want
+		console.log("Results: ");
+		for(var i = 0; i < results.rows.length; i++) {
+		console.log(" Result " + i + ": ");
+		//console.log(" sourcetype: " + results.rows[i][sourcetypeIndex]);
+		//console.log(" user: " + results.rows[i][userIndex]);
+		var jj=JSON.stringify(eval("(" + results.rows[i][rawIndex] + ")"));
+		//console.log(" _raw: " + results.rows[i][rawIndex]);
+		console.log(jj);
+		}
+		done();
+		}
+		]
+		);		
+		
+    </script> 
+</head>
+<body>
+</body>
+</html>

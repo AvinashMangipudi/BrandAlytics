@@ -1,0 +1,37 @@
+http://docs.splunk.com/Documentation/Splunk/5.0.4/Indexer/Moveanindex
+
+FAQ
+
+Brand
+A brand is an arbitrary word that can mean any of these: Movie, Personality, Company, Product. Any conceivable Keyword or Label can be considered as a brand.
+
+Site 
+An internet website pages which should be queried for the brand.
+
+Language
+Results found in a specified language script. 
+
+Country
+Restricts results to items originating in a particular country and whose country of origin matches the parameter value.
+
+Definitions
+Contains few predefined groupings of brands. The Define section will eventually be a hub where you  can add the brands, you will be interested in.
+
+
+Environment Settings
+
+BrandAlytics uses Scripted inputs to fill its index, which would work if the environment settings are set according to the Splunk installation.
+
+On windows, Right Click on Computer>Properties>Advanced System settings>Environment Variables>
+
+Set PYTHONHOME environment variable : No module name site,
+SPLUNKHOME
+
+%SPLUNKHOME%\etc\system\default\props.conf
+
+TRUNCATE=0
+LINE_BREAKER[}\r\n]
+
+
+
+

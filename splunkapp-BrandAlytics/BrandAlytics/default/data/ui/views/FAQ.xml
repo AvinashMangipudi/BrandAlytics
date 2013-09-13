@@ -1,0 +1,86 @@
+
+<view autoCancelInterval="90" isVisible="true" onunloadCancelJobs="true" template="dashboard.html" isSticky="False">
+  <label>FAQ</label>
+  <module name="AccountBar" layoutPanel="appHeader" />
+  <module name="AppBar" layoutPanel="appHeader" />
+  <module name="SideviewUtils" layoutPanel="appHeader" />
+  
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="maxSize">2</param>
+    <param name="clearOnJobDispatch">False</param>
+  </module>
+  
+
+  <module name="HTML" layoutPanel="viewHeader">
+    <param name="html"><![CDATA[
+    <h1>FAQ</h1>
+    ]]></param>
+  </module>
+
+  
+  <module name="HTML" layoutPanel="panel_row1_col1">
+    <param name="html"><![CDATA[
+<h1>
+      <div style="background-color:black">
+        <p>		
+				What is a Brand?<br/>
+
+				A brand is an arbitrary word that can mean any of these: Movie, Personality, Company, Product. Any conceivable Keyword or Label can be considered as a brand.
+        <p>
+	  
+        <p>
+
+				What is a Group?<br/>
+				A group is a collection of Brands and other filters such as Site, Language, Country defined on the defined brands.
+        </p>
+        <p>		
+				What are Definitions?<br/>
+
+				Definitions contains few predefined groupings of brands. The Define section will eventually be a hub where you  can add the brands, you will be interested in.		
+        </p>
+		
+				What is a Site?<br/>
+
+				An internet website pages which should be queried for the defined brands.
+        </p>
+        <p>		
+				What is a Language?<br/>
+
+				Language restricts the analytics results to webpages containing the specified language.
+        </p>
+        <p>		
+				What is a Country?<br/>
+
+				Restricts results to items originating in a particular country and whose country of origin matches the parameter value.
+        </p>
+        <p>		
+				What is API Key?<br/>
+				This is a Google Provided API key that is used by BrandAlytics internally . Get yours from <a href='https://developers.google.com/custom-search/v1/getting_started?hl=en'>here</a>. 
+
+        </p>
+        <p>		
+				Is the service free?<br/>
+				The service is charged based upon usage and beyond 100 queries per day is billed by Google. Until 100 queries is free.
+
+        </p>		
+        <p>		
+				What is CX?<br/>
+				CX is a Google Custom Search Engine parameter and more info can be obtained from <a href='https://developers.google.com/custom-search/v1/using_rest#cx'>here</a>.
+
+        </p>				
+				What is the Analytics tab?<br/>
+				Analytics tab contains information to access
+
+        </p>
+      </div>
+</h1>
+
+
+    ]]></param>
+
+  </module>  
+
+
+</view>
+

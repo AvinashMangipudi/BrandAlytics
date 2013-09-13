@@ -1,0 +1,30 @@
+<nav>
+
+    <collection label="Brand">
+        <view name="Define" />
+        <divider />
+        <view name="Definitions" />
+        <divider />
+        <view name="Settings" />
+    </collection>
+    <collection label="Analytics">
+        <view name="Site" />	
+        <divider />
+        <view name="Search" />		
+        <divider />
+        <view name="Country" />		
+        <divider />
+        <view name="Language" />						
+		<divider />
+        <view name="Brand" />
+    </collection>	
+    <collection label="Help">
+        <view name="Guide" />		
+        <divider />
+        <view name="FAQ" />		
+        <divider />
+        <view name="About" />		
+    </collection>		
+	    <view name="Home" default="true" />
+
+</nav>
